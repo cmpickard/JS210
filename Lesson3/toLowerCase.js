@@ -1,6 +1,7 @@
 // Write a function that returns a string converted to lowercase.
 
-// To convert a single uppercase character to a lowercase character, get its ASCII
+// To convert a single uppercase character to a lowercase character, get its
+// ASCII
 // numeric representation from the ASCII table, add 32 to that number, then
 // convert the number back to a character using the same ASCII table. You can
 // use the String.fromCharCode and the String.charCodeAt methods for these
@@ -25,23 +26,23 @@
 //   class.
 
 function toLowerCase(string) {
-  upcaseString = '';
-  const CONVERSION_OFFSET = 32;
+  const A_VALUE = 'A'.charCodeAt(0);
+  const Z_VALUE = 'Z'.charCodeAt(0);
+  const CASE_CONVERSION = 32;
 
-  for (let idx = 0; idx < string.length; idx++) {
-    let ascii = string.charCodeAt(idx);
-
-    if (ascii <= 90 && ascii >= 65) {
-      upcaseString += String.fromCharCode(ascii + CONVERSION_OFFSET);
-    } else {
-      upcaseString += string[idx];
+  let upcased = '';
+  for (let char of string) {
+    let ascii = char.charCodeAt(0);
+    if (ascii >= A_VALUE && ascii <= Z_VALUE) {
+      ascii += CASE_CONVERSION;
     }
+
+    upcased += String.fromCharCode(ascii);
   }
-  
-  return upcaseString;
+
+  return upcased;
 }
 
 console.log(toLowerCase('ASGh'));
-
 console.log(toLowerCase('BGN'));
 

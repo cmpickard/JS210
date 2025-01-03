@@ -17,9 +17,10 @@
 // 17
 // 19
 
-function logOddNumbers(max) {
-  for (let currNum = 1; currNum <= max; currNum += 2) {
-    console.log(currNum);
+function oddNumbers(num) {
+  for (let printNum = 1; printNum <= num; printNum += 2) {
+    console.log(printNum);
   }
 }
-logOddNumbers(20);
+
+oddNumbers(19);

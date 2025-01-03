@@ -18,18 +18,28 @@
 // // log to the console
 // Based on the average of your 3 scores your letter grade is "B".
 
-let rlSync = require('readline-sync')
-let score1 = rlSync.question('Enter score 1:\n');
-let score2 = rlSync.question('Enter score 2:\n');
-let score3 = rlSync.question('Enter score 3:\n');
-avg = (Number(score1) + Number(score2) + Number(score3)) / 3;
-grade = 'F';
-if (avg >= 90) {
-  grade = 'A';
-} else if (avg >= 70) {
-  grade = 'B';
-} else if (avg >= 50) {
-  grade = 'C'
+const rlsync = require('readline-sync');
+let grade1 = Number(rlsync.question('Enter score 1:\n'));
+let grade2 = Number(rlsync.question('Enter score 2:\n'));
+let grade3 = Number(rlsync.question('Enter score 3:\n'));
+let letter;
+
+switch (Math.trunc((grade1 + grade2 + grade3) / 30)) {
+  case 10:
+  case 9:
+    letter = 'A';
+    break;
+  case 8:
+    letter = 'B';
+    break;
+  case 7:
+    letter = 'C';
+    break;
+  case 6:
+    letter = 'D';
+    break;
+  default:
+    letter = 'F';
 }
 
-console.log(`Based on the avg of your 3 scores your letter grade is ${grade}`);
+console.log(`Based on the avg of your scores, your letter grade is ${letter}.`);

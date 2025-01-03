@@ -1,3 +1,5 @@
+/* eslint-disable max-lines-per-function */
+/* eslint-disable id-length */
 // Write a function that takes a string as an argument, and returns the string
 // stripped of spaces from both ends. Do not remove or alter internal spaces.
 
@@ -27,7 +29,7 @@ function trim(string) {
   return stripped;
 }
 
-// console.log(trim('   abc   '));
+console.log(trim('   abc   '));
 
 // Non-RegExp solution
 
@@ -59,7 +61,6 @@ function calcSpaces(string) {
 }
 
 function trim2(string) {
-  let length = string.length;
   let spaces = calcSpaces(string);
   let trimmedFront = '';
 
@@ -85,3 +86,13 @@ function trim2(string) {
 
 trim2('   abc   ');
 trim2(' abf fasd                 ');
+
+function trim3(string) {
+  let firstChar = string.split('').findIndex((char) => char !== ' ');
+  let result = string.split('').slice(firstChar).reverse().join('');
+  firstChar = string.split('').findIndex((char) => char !== ' ');
+  return result.split('').slice(firstChar).reverse().join('');
+}
+
+console.log(trim3('   abc   '));
+console.log(trim3(' abf fasd                 '));

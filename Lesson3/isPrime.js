@@ -13,10 +13,11 @@
 // isPrime(0);   // false
 
 function isPrime(num) {
-  if (num <= 1) return false;
-  
-  for (let divisor = 2; divisor < num; divisor++) {
-    if (num % divisor === 0) return false
+  if (num < 2) return false;
+  if (num % 2 === 0) return true;
+
+  for (let divisor = 3; divisor <= num / 3; divisor += 2) {
+    if (num % divisor === 0) return false;
   }
 
   return true;

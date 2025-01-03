@@ -8,11 +8,14 @@
 // gcd(9, 2);    // 1
 
 function gcd(num1, num2) {
-  currNum = Math.min(num1, num2)
-  while(currNum !== 0) {
-    if (num1 % currNum === 0 && num2 % currNum === 0) return currNum;
-    currNum -= 1;
+  if (num1 < num2) [num1, num2] = [num2, num1];
+  let gcd = 1;
+
+  for (let divisor = 2; divisor <= num2; divisor++) {
+    if (num1 % divisor === 0 && num2 % divisor === 0) gcd = divisor;
   }
+
+  return gcd;
 }
 
 console.log(gcd(12, 4));
@@ -24,14 +27,13 @@ console.log(gcd(9, 2));
 // array of two or more numbers instead?
 
 function gcd2(numArr) {
-  numArr.sort((a, b) => a - b);
-  let greatestCommonDenom;
+  let gcd;
 
-  for (let index = 1; index < numArr.length - 1; index++) {
-    greatestCommonDenom = gcd(numArr[0], numArr[index]);
+  for (let divisor = 1; divisor <= Math.min(...numArr); divisor++) {
+    if (numArr.every((num) => num % divisor === 0)) gcd = divisor;
   }
 
-  return greatestCommonDenom;
+  return gcd;
 }
 
-console.log(gcd2([5, 10, 15, 20, 100, 50, 60])) //5
+console.log(gcd2([5, 10, 15, 20, 100, 50, 60])); //5

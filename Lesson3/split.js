@@ -73,28 +73,24 @@
 // splitString('helloWorld', '');
 // splitString(';hello;', ';');
 
-function splitString(string, delimiter){
-  if (delimiter === undefined) {
-    console.log("Error! No delimiter")
-    return;
+function splitString(string, delimiter) {
+  let word = '';
+  for (let idx = 0; idx < string.length; idx++) {
+    if (string[idx] === delimiter) {
+      console.log(word);
+      word = '';
+    } else if (delimiter === '') {
+      console.log(string[idx]);
+    } else {
+      word += string[idx];
+    }
   }
 
-  let currIndex = -1;
-  let splitWord;
-  let char;
-
-  while(currIndex < string.length - 1) {
-    splitWord = '';
-    do {
-      currIndex += 1;
-      char = string[currIndex];
-      if (char !== delimiter && char !== undefined) splitWord += char;
-    } while(char !== delimiter && currIndex < string.length - 1);
-    console.log(splitWord);
-  }
+  if (word) console.log(word);
 }
 
 splitString('hello,world', ',');
 splitString(';hello;', ';');
 splitString('hello', ';');
 splitString('abc,123,hello world', ',');
+splitString('abc,', '');

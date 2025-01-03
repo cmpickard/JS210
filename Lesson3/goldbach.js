@@ -30,41 +30,28 @@
 
 function isPrime(num) {
   if (num < 2) return false;
-  
-  for (let i = 2; i <= (num / 2); i++) {
-    if (num % i === 0) return false;
+  if (num % 2 === 0) return false;
+
+  for (let divisor = 3; divisor <= num / 3; divisor += 2) {
+    if (num % divisor === 0) return false;
   }
 
   return true;
 }
 
-function getCandidatePrimes(expectedSum) {
-  let candidatePrimes = [];
-  for (let i = 2; i < expectedSum; i++) {
-    if (isPrime(i)) {
-      candidatePrimes.push(i);
-    }
-  }
-  return candidatePrimes;
-}
-
 function checkGoldbach(expectedSum) {
-  if (expectedSum % 2 !== 0 || expectedSum < 4) {
-    console.log(null);
-    return;
+  if (expectedSum % 2 === 1 || expectedSum < 4) console.log(null);
+
+  let candidatePrimes = [2];
+  for (let num = 3; num < expectedSum; num += 2) {
+    if (isPrime(num)) candidatePrimes.push(num);
   }
 
-  let candidatePrimes = getCandidatePrimes(expectedSum);
-
-  candidatePrimes.forEach((prime1, index1) => {
-    candidatePrimes.forEach((prime2, index2) => {
-      if (index2 >= index1) {
-        if (prime1 + prime2 === expectedSum) {
-          console.log([prime1, prime2]);
-        }
-      }
-    })
-  })
+  candidatePrimes.forEach((prime1, idx) => {
+    candidatePrimes.slice(idx).forEach((prime2) => {
+      if (prime1 + prime2 === expectedSum) console.log(prime1 + ' ' + prime2);
+    });
+  });
 }
 
 checkGoldbach(4);

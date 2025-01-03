@@ -17,17 +17,20 @@
 // 21
 
 const logMultiples = function logMultiples(num) {
-  let multiples = [];
-  counter = num;
-  while (counter < 100) {
-    if (counter % 2 === 1) {
-      multiples.push(counter);
+  let largestMultiple = -1;
+  for (let currNum = 100; currNum >= num; currNum--) {
+    if (currNum % num === 0) {
+      largestMultiple = currNum;
+      break;
     }
-    counter += num;
   }
-  multiples.reverse();
-  multiples.forEach( num => console.log(num) );
-}
+
+  for (let currNum = largestMultiple; currNum >= num; currNum -= num) {
+    if (currNum % 2 === 1) {
+      console.log(currNum);
+    }
+  }
+};
 
 logMultiples(17);
 logMultiples(21);
@@ -36,16 +39,3 @@ logMultiples(21);
 // Determine the number's largest multiple that is less than 100, then start the
 // loop with that multiple. With each iteration of the loop, you can decrement
 // the number by the argument; when the result is negative, you can quit.
-
-function logMultiples2(num) {
-  max = (Math.floor(100 / num) + 1) * num;
-  
-  while (max >= num) {
-    max -= num
-    if (max % 2 === 0) continue;
-    console.log(max);
-    max -= num;
-  }
-}
-
-logMultiples2(17);

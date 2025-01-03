@@ -7,7 +7,7 @@
 // If the value of start is greater than end, swap the values of the two, then
 // return the substring as described above.
 // If start is equal to end, return an empty string.
-// If end is omitted, the end variable inside the function isundefined. Return
+// If end is omitted, the end variable inside the function is undefined. Return
 // the substring starting at position start up through (and including) the end
 // of the string.
 // If either start or end is less than 0 or NaN, treat it as 0.
@@ -29,15 +29,12 @@
 // substring(string, 8, 20);   // "rld"
 
 function substring(string, start, end) {
-  if (start < 0 || isNaN(start) || typeof start !== 'number') start = 0;
-  if (start > string.length) start = string.length;
-  if (end === undefined || end > string.length) end = string.length;
-  if (end < 0 || isNaN(end)) end = 0;
-  if (start > end) {
-    let temp = end;
-    end = start;
-    start = temp;
-  }
+  start = start > 0 ? start : 0;
+  start = start < string.length ? start : string.length;
+  end = end ?? string.length;
+  end = end > 0 ? end : 0;
+  end = end < string.length ? end : string.length;
+  if (start > end) [start, end] = [end, start];
 
   let substr = '';
   for (let idx = start; idx < end; idx++) {
@@ -47,6 +44,11 @@ function substring(string, start, end) {
   return substr;
 }
 
-let str = 'Hello, World!';
-console.log(substring(str, 0, -1));
-console.log(substring(str, 'a'));
+let string = 'hello world';
+console.log(substring(string, 2, 4));    // "ll"
+console.log(substring(string, 4, 2));    // "ll"
+console.log(substring(string, 0, -1));   // ""
+console.log(substring(string, 2));       // "llo world"
+console.log(substring(string, 'a'));     // "hello world"
+console.log(substring(string, 8, 20));   // "rld"
+console.log(substring(string, 2, 2));    // ""

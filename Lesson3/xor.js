@@ -25,7 +25,7 @@
 // isXor('2', 23);         // false
 
 function isXor(val1, val2) {
-  return !!((val1 || val2) && !(val1 && val2));
+  return !(!!val1 === !!val2);
 }
 
 console.log(isXor(false, true));

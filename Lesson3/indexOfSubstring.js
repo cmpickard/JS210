@@ -34,42 +34,31 @@
 // you may not use any other properties or methods from JavaScript's
 // built-in String class.
 
-function indexOf(firstString, secondString) {
-  for (let index1 = 0; index1 < firstString.length; index1++) {
-    let match = true;
-      for (let index2 = 0; index2 < secondString.length; index2++) {
-        if (firstString[index1 + index2] !== secondString[index2]) {
-          match = false;
-          break;
-        }
-      }
-    if (match) return index1;
+function indexOf(string, substring) {
+  for (let idx = 0; idx < string.length; idx++) {
+    if (substring[0] !== string[idx]) continue;
+
+    for (let subIdx = 0; subIdx < substring.length; subIdx++) {
+      if (substring[subIdx] !== string[idx + subIdx]) break;
+      if (subIdx === substring.length - 1) return idx;
+    }
   }
+
   return -1;
 }
 
-function slice(string, firstIndex, length) {
-  let sliced = '';
-  if (length === undefined) length = string.length;
-  for (let index = firstIndex; index < (firstIndex + length); index++) {
-    let nextChar = string[index];
-    if (nextChar === undefined) break;
-    sliced += nextChar;
-  }
-  
-  return sliced;
-}
+function lastIndexOf(string, substring) {
+  let lastIndex = -1;
+  for (let idx = 0; idx < string.length; idx++) {
+    if (substring[0] !== string[idx]) continue;
 
-function lastIndexOf(firstString, secondString) {
-  let results = [];
-  let resultIdx;
-  while (resultIdx !== -1) {
-    resultIdx = indexOf(firstString, secondString);
-    firstString = slice(firstString, resultIdx + 1);
-    if (resultIdx !== -1) results.push(resultIdx);
+    for (let subIdx = 0; subIdx < substring.length; subIdx++) {
+      if (substring[subIdx] !== string[idx + subIdx]) break;
+      if (subIdx === substring.length - 1) lastIndex = idx;
+    }
   }
-  if (results.length === 0) return -1;
-  return results.reduce((acc, num) => acc + num) + (results.length - 1);
+
+  return lastIndex;
 }
 
 console.log(indexOf('Some strings', 's') === 5);
@@ -81,3 +70,36 @@ console.log(lastIndexOf('Some strings', 's') === 11);
 console.log(lastIndexOf('ssssss', 's') === 5);
 console.log(lastIndexOf('Blue Whale, Killer Whale', 'Whale') === 19);
 console.log(lastIndexOf('Blue Whale, Killer Whale', 'all') === -1);
+
+
+// Further Exploration
+// If you haven't used it yet, implement the lastIndexOf function by
+// reusing your indexOf function
+
+function simpleSlice(str, start) {
+  let result = '';
+  for (let idx = start; idx < str.length; idx++) {
+    result += str[idx];
+  }
+
+  return result;
+}
+
+function lastIndexOf2(string, substring) {
+  let currIndex = indexOf(string, substring);
+  if (currIndex === -1) return currIndex;
+  let nextMatch = currIndex;
+  let remainder = string;
+  while (nextMatch !== -1) {
+    remainder = simpleSlice(remainder, nextMatch + 1);
+    nextMatch = indexOf(remainder, substring);
+    if (nextMatch !== -1) currIndex += (nextMatch + 1);
+  }
+
+  return currIndex;
+}
+
+console.log(lastIndexOf2('Some strings', 's')); //=== 11);
+console.log(lastIndexOf2('ssssss', 's')); //=== 5);
+console.log(lastIndexOf2('Blue Whale, Killer Whale', 'Whale')); //=== 19);
+console.log(lastIndexOf2('Blue Whale, Killer Whale', 'all')); //=== -1);

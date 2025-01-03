@@ -24,12 +24,12 @@ function startsWith(string, searchString) {
   for (let idx = 0; idx < searchString.length; idx++) {
     if (string[idx] !== searchString[idx]) return false;
   }
+
   return true;
 }
 
 let str = 'We put comprehension and mastery above all else';
 console.log(startsWith(str, 'We put'));
-console.log(startsWith(str, 'We'));
 console.log(startsWith(str, 'We'));
 console.log(startsWith(str, 'put'));
 console.log(startsWith(str, ''));

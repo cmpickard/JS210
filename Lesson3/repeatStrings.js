@@ -20,20 +20,21 @@
 //  methods from JavaScript's built-in String class.
 
 function repeat(string, times) {
-  if (times < 0 || typeof times !== 'number') return undefined;
-
-  let repeated = '';
-  for (i = 1; i <= times; i++) {
-    repeated += string;
+  let result;
+  if (typeof times === 'number' && times >= 0) {
+    for (let num = 0; num < times; num++) {
+      result = result ? result + string : string;
+    }
   }
 
-  return repeated;
+  return result;
 }
 
 console.log(repeat('abc', -1));
 console.log(repeat('abc', 0));
 console.log(repeat('abc', 1));
 console.log(repeat('abc', 2));
+console.log(repeat('abc', 4));
 console.log(repeat('abc', false));
 console.log(repeat('abc', null));
 console.log(repeat('abc', ' '));

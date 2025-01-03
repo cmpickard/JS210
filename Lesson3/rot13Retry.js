@@ -28,20 +28,20 @@
 
 function rot13(string) {
   const ROTATION = 13;
-  let encrypted = '';
+  const FIRST_HALF_PAT = /[A-Ma-m]/;
+  const BACK_HALF_PAT = /[N-Zn-z]/;
 
-  for (let index = 0; index < string.length; index++) {
-    let asciiValue = string.charCodeAt(index);
-    let char = string[index];
+  return string.split('').map((char) => {
+    let ascii = char.charCodeAt(0);
 
-    if (/[A-Za-z]/.test(char)) {
-      asciiValue += /[A-Ma-m]/.test(char) ? ROTATION : -ROTATION;
+    if (FIRST_HALF_PAT.test(char)) {
+      ascii += ROTATION;
+    } else if (BACK_HALF_PAT.test(char)) {
+      ascii -= ROTATION;
     }
 
-    encrypted += String.fromCharCode(asciiValue);
-  }
-
-  return encrypted;
+    return String.fromCharCode(ascii);
+  }).join('');
 }
 
 console.log(rot13('abcdefghijklmnopqrstuvwxyz'));
