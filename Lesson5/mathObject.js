@@ -8,6 +8,10 @@
 // more about radians, check out this article. Use the Math.PI property to create
 // a function that converts radians to degrees.
 
+// eslint-disable-next-line no-unused-vars
+function radiansToDegrees(degrees) {
+  return degrees * (Math.PI / 180);
+}
 
 // To convert a positive integer to a negative integer, you can just place a minus
 // sign in front of the variable that contains the integer. However, if you don't
@@ -67,9 +71,9 @@ console.log(Math.round(c));
 
 function randBetween(min, max) {
   if (min > max) [min, max] = [max, min];
-  if (min === max) return min;
 
-  return (Math.floor((Math.random() * (max - min + 1)) + 1));
+  let rand = Math.round((Math.random() * 100));
+  return min + (((max - min) / 100) * rand);
 }
 
-console.log(randBetween(1,10));
+console.log(randBetween(20,80));

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // In the problems below, we ask you to write functions that work with Arrays.
 // You may use Array's index access ([]), the length property, and any
 // Array Methods you need.
@@ -26,7 +27,7 @@ function firstElementOf(arr) {
 // lastElementOf(['U', 'S', 'A']);  // returns "A"
 
 function lastElementOf(arr) {
-  return arr[arr.length - 1];
+  return arr.slice(-1);
 }
 
 
@@ -51,22 +52,20 @@ function nthElementOf(arr, index) {
 /* ANSWER: indices out of range will always return undefined */
 
 
-
-
 // Can we insert data into an array at a negative index? If so, why is this
 // possible?
 
-/* 
+/*
 ANSWER:
   That's possible because arrays are fundamentally objects!
   All the operations we perform on array elements are really just operations
   on an object, with the indices automatically being used as keys and the
-  elements we're storing the array as values. 
+  elements we're storing the values assigned to those keys.
   BUT that doesn't mean we are limited to positive integer keys! Like any object
   in JS, we are free to use whatever string value we want as a key, including
   negative numbers. Only, those key/value pairs won't behave like array elements
   They'll behave like normal object properties -- e.g. the length of the array
-  won't include properties with keys that are outside the counting numbers, any
+  won't include properties with keys that are outside the counting numbers & any
   iteration methods for arrays like forEach will ignore those properties
 */
 
@@ -83,12 +82,7 @@ ANSWER:
 // firstNOf(digits, 3);    // returns [4, 8, 15]
 
 function firstNOf(arr, count) {
-  newArr = [];
-  for (let i = 0; i < count; i++) {
-    newArr[i] = arr[i];
-  }
-
-  return newArr;
+  return arr.slice(0, count);
 }
 
 
@@ -103,15 +97,7 @@ function firstNOf(arr, count) {
 // lastNOf(digits, 3);    // returns [16, 23, 42]
 
 function lastNOf(arr, count) {
-  newArr = [];
-
-  if (count > arr.length) count = arr.length;
-
-  for (let i = (arr.length - count); i < arr.length; i++) {
-    newArr.push(arr[i]);
-  }
-
-  return newArr;
+  return count > arr.length ? arr : arr.slice(-1 * count);
 }
 
 
@@ -134,5 +120,5 @@ function lastNOf(arr, count) {
 // endsOf([4, 8, 15], [16, 23, 42]);  // returns [4, 42]
 
 function endsOf(beginningArr, endingArr) {
-  return [beginningArr[0], endingArr[endingArr.length - 1]];
+  return [beginningArr[0], endingArr.slice(-1)];
 }

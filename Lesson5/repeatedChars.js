@@ -11,12 +11,16 @@
 // characters that have a count of 2 or more. It also ignores the case.
 
 function repeatedCharacters(str) {
-  let count = [];
-  let chars = str.split('').map( char => char.toLowerCase() );
-
-  chars.forEach(char => {
-    count[char] = (count[char] !== undefined ? count[char] + 1 : 1);
-  });
+  let count = Array.from(str)
+    .map(char => char.toLowerCase())
+    .reduce((obj, char) => {
+      if (Object.keys(obj).includes(char)) {
+        obj[char] += 1;
+      } else {
+        obj[char] = 1;
+      }
+      return obj;
+    }, {});
 
   for (let char in count) {
     if (count[char] === 1) delete count[char];

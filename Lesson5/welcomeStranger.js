@@ -13,10 +13,9 @@
 // Hello, John Q Doe! Nice to have a Master Plumber around.
 
 function greetings(nameArr, titles) {
-  let wholeName = nameArr.join(' ');
-  let jobTitle = titles.title + ' ' + titles.occupation;
-
-  console.log(`Hello, ${wholeName}! Nice to have a ${jobTitle} around.`);
+  let fullName = nameArr.join(' ');
+  let fullTitle = Object.values(titles).join(' ');
+  console.log(`Hello, ${fullName}! Nice to have a ${fullTitle} around!`);
 }
 
 greetings(['John', 'Q', 'Doe'], { title: 'Master', occupation: 'Plumber' });

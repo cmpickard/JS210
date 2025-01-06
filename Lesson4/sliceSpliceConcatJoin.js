@@ -10,16 +10,11 @@
 // slice([1, 2, 3, 4, 5], 0, 2);                      // [ 1, 2 ]
 // slice(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 1, 3);  // [ 'b', 'c' ]
 
-function push(arr, el) {
-  arr[arr.length] = el;
-  return arr;
-}
 
 function slice(array, start, end) {
   let newArr = [];
-
-  for (let index = start; index < end; index++) {
-    push(newArr, array[index]);
+  for (let idx = start; idx < end; idx++) {
+    newArr[newArr.length] = array[idx];
   }
 
   return newArr;
@@ -41,34 +36,19 @@ console.log(slice(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 1, 3));  // [ 'b', 'c' ]
 // splice(count, 2, 5);                   // [ 3, 4, 5, 6, 7 ]
 // count;                                 // [ 1, 2, 8 ]
 
-function deleteAt(arr, index) {
-  for (let i = index; i < arr.length - 1; i++) {
-    arr[i] = arr[i + 1];
-  }
-  arr.length = arr.length - 1;
-}
-
-let arr2 = [0,1,2,3];
-deleteAt(arr2, 2);
-console.log(arr2);
 
 function splice(arr, start, numVals) {
-  let newArr = [];
-  let counter = 0;
-  
-  while(counter < numVals) {
-    push(newArr, arr[start + counter]);  
-    counter += 1;
+  let removed = [];
+  let count = numVals;
+  for (let idx = start; ; idx++) {
+    removed[removed.length] = arr[idx];
+    arr[idx] = arr[idx + numVals];
+    count -= 1;
+    if (count <= 0) break;
   }
 
-  counter = 0;
-
-  while(counter < numVals) {
-    deleteAt(arr, start);
-    counter += 1;
-  }
-
-  return newArr;
+  arr.length = start + 1;
+  return removed;
 }
 
 let count = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -87,24 +67,23 @@ console.log(count);                                 // [ 1, 2, 8 ]
 
 function concat(arr1, arr2) {
   let newArr = [];
-
-  for (let index1 = 0; index1 < arr1.length; index1++) {
-    push(newArr, arr1[index1]);
+  for (let idx = 0; idx < arr1.length; idx++) {
+    newArr[newArr.length] = arr1[idx];
   }
 
-  for (let index2 = 0; index2 < arr2.length; index2++) {
-    push(newArr, arr2[index2]);
+  for (let idx = 0; idx < arr2.length; idx++) {
+    newArr[newArr.length] = arr2[idx];
   }
 
   return newArr;
 }
 
-console.log(concat([1, 2, 3], [4, 5, 6]));
+console.log(concat([1, 2, 3], [4, 5, 6])); // [1, 2, 3, 4, 5, 6]
 
 
-// Write a function named join that accepts two arguments: an Array and a String.
+// Write a function named join that accepts two arguments: an Array and a String
 // The function should coerce each value in the Array to a String, and then join
-// those values together using the second argument as a separator. You may assume
+// those values together using the second argument as a separator. You may assum
 // that a separator will always be passed.
 
 // You can call the String function on any JavaScript value to get its
@@ -114,14 +93,12 @@ console.log(concat([1, 2, 3], [4, 5, 6]));
 // join([1, 2, 3], ' and ');                 // '1 and 2 and 3'
 
 function join(arr, separator) {
-  newString = '';
-  
-  for (let index = 0; index < arr.length; index++) {
-    newString += String(arr[index]);
-    newString += (index < arr.length - 1) ? separator : '';
+  let joined = arr[0];
+  for (let idx = 1; idx < arr.length; idx++) {
+    joined += separator + arr[idx];
   }
 
-  return newString;
+  return joined;
 }
 
 console.log(join(['bri', 'tru', 'wha'], 'ck '));

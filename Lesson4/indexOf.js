@@ -7,10 +7,13 @@
 
 function indexOf(arr, val) {
   let index = -1;
-  for (let i = arr.length -1; i >= 0; i--) {
-    if(arr[i] === val) index = i;
+  for (let currIdx = 0; currIdx < arr.length; currIdx++) {
+    if (arr[currIdx] === val) {
+      index = currIdx;
+      break;
+    }
   }
-  
+
   return index;
 }
 
@@ -28,8 +31,10 @@ console.log(indexOf([1,2,3], 4) === -1);
 
 function lastIndexOf(arr, val) {
   let index = -1;
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === val) index = i;
+  for (let currIdx = 0; currIdx < arr.length; currIdx++) {
+    if (arr[currIdx] === val) {
+      index = currIdx;
+    }
   }
 
   return index;

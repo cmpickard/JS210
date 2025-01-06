@@ -7,7 +7,7 @@
 // function should return true if the arrays contain the same values, or false
 // if they do not.
 
-// Test the function with arrays that contain number, string, and boolean values.
+// Test the function with arrays that contain number, string, and boolean values
 // Don't worry about handling arrays that contain other Arrays or Objects.
 
 
@@ -21,9 +21,8 @@
 
 function arraysEqual(arr1, arr2) {
   if (arr1.length !== arr2.length) return false;
-
-  for (let index = 0; index < arr1.length; index++) {
-    if (arr1[index] !== arr2[index]) return false;
+  for (let idx = 0; idx < arr1.length; idx++) {
+    if (arr1[idx] !== arr2[idx]) return false;
   }
 
   return true;

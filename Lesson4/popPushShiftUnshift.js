@@ -2,7 +2,6 @@
 // other value. The function should append the second argument to the end of the
 // Array, and return the new length of the Array.
 
-// 
 // let count = [0, 1, 2];
 // push(count, 3);         // 4
 // count;                  // [ 0, 1, 2, 3 ]
@@ -12,23 +11,25 @@ function push(array, element) {
   return array.length;
 }
 
+let tester = [1,2,3];
+console.log(push(tester,4));
+console.log(tester);
+
 // Write a function named pop that accepts one argument: an Array. The function
 // should remove the last element from the array and return it.
 
-// 
 // let count = [1, 2, 3];
 // pop(count);             // 3
 // count;                  // [ 1, 2 ]
 
 function pop(array) {
-  if (array.length === 0 ) return undefined;
-
-  let element = array[array.length - 1];
-  array.length = array.length - 1;
-  return element;
+  if (array.length === 0) return undefined;
+  let popped = array[array.length - 1];
+  array.length -= 1;
+  return popped;
 }
 
-arr = [1,2,3];
+let arr = [1,2,3];
 console.log(pop(arr));
 console.log(arr);
 
@@ -38,46 +39,42 @@ console.log(arr);
 // and return the new length of the array. You will need a for loop for
 // this problem.
 
-// 
 // let count = [1, 2, 3];
 // unshift(count, 0);      // 4
 // count;                  // [ 0, 1, 2, 3 ]
 
 function unshift(array, element) {
-  for (let i = array.length; i >= 0; i--) {
-    array[i] = array[i - 1];
+  for (let idx = array.length; idx > 0; idx--) {
+    array[idx] = array[idx - 1];
   }
 
   array[0] = element;
   return array.length;
 }
 
-arr = [2,3,4]
+arr = [2,3,4];
 console.log(unshift(arr, 1) === 4);
 console.log(arr);
 
 
-
-// Write a function named shift that accepts one argument: an Array. The function
+// Write a function named shift that accepts one argument: an Array. The
+// function
 // should remove the first value from the beginning of the Array and return it.
 
-// 
 // let count = [1, 2, 3];
 // shift(count);           // 1
 // count;                  // [ 2, 3 ]
 
 function shift(arr) {
-  if (arr.length === 0) return undefined;
-  
-  let value = arr[0];
-  for (let i = 0; i < arr.length - 1; i++) {
-    arr[i] = arr[i + 1];
+  let shifted = arr[0];
+  for (let idx = 0; idx < arr.length; idx++) {
+    arr[idx] = arr[idx + 1];
   }
-  
-  arr.length = arr.length - 1;
-  return value;
+
+  arr.length -= 1;
+  return shifted;
 }
 
-arr2 = [1,2,3]
-console.log(shift(arr2));
-console.log(arr2);
+let arr2 = [1,2,3];
+console.log(shift(arr2)); // 1
+console.log(arr2); // [2, 3]
